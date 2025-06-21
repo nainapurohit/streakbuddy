@@ -1,0 +1,13 @@
+# Node modules
+client/node_modules
+server/node_modules
+
+# Build output
+dist
+
+# OS junk
+.DS_Store
+
+# Env secrets
+.env
+server/.env
