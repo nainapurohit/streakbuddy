@@ -1,8 +1,9 @@
 // index.js
 
-const express = require('express'); // Import Express library
-const cors = require('cors'); // Allow frontend to talk to backend
-const dotenv = require('dotenv'); // Load environment variables from .env
+import express from "express"; // Import Express library
+import cors from "cors"; // Allow frontend to talk to backend
+import dotenv from "dotenv"; // Load environment variables from .env
+import mongoose from "mongoose";
 
 dotenv.config(); // Actually load those .env variables
 
@@ -18,7 +19,19 @@ app.get('/', (req, res) => {
   res.send('Hello from StreakBuddy Server!'); // Simple test route
 });
 
+//mongodb connection
+mongoose.connect(process.env.MONGO_URI,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(()=>{
+  console.log("✅Connected to MongoDB successfully");
+
 // Start the server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`); // Log when server is running
+app.listen(port, () => 
+  console.log(`Server running on port ${port}`)); // Log when server is running
+})
+
+.catch((err)=>{
+  console.error("❌Mongodb connection error:",err);
 });
