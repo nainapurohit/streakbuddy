@@ -4,6 +4,7 @@ import express from "express"; // Import Express library
 import cors from "cors"; // Allow frontend to talk to backend
 import dotenv from "dotenv"; // Load environment variables from .env
 import mongoose from "mongoose";
+import userRoutes from "./routes/userRoutes.js"; //importing router?
 
 dotenv.config(); // Actually load those .env variables
 
@@ -13,6 +14,9 @@ const port = process.env.PORT || 5000; // Use port from .env or default to 5000
 // Middleware
 app.use(cors()); // Enable CORS for cross-origin requests
 app.use(express.json()); // Parse JSON bodies in requests
+
+// Routes :-> any user request will be handled by userRoutes.js
+app.use("/api/users", userRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
